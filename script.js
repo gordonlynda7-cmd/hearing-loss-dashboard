@@ -12,16 +12,14 @@ function typeText(el, text, speed = 60) {
     step();
 }
 
-// Fetch stats, track load + scroll state independently
-let statsData = null;
+// Stats (hardcoded, no backend needed for deployment)
+let statsData = {
+    participants: 16415,
+    raw_columns: 693,
+    selected_vars: 111,
+    domains: 5
+};
 let statsInView = false;
-
-fetch('http://127.0.0.1:8000/stats')
-    .then(response => response.json())
-    .then(data => {
-        statsData = data;
-        tryShowStats();
-    });
 
 function tryShowStats() {
     if (statsData && statsInView) {
@@ -44,7 +42,7 @@ const statsObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.3 });
 statsObserver.observe(document.getElementById('stats'));
 
-// Domain descriptions, animated bar breakdown
+// Domain descriptions, animated bar breakdown (hardcoded, no backend needed)
 const domainMeta = {
     hearing_loss: { label: "Hearing Loss", desc: "Placeholder text about hearing loss variables — thresholds, measures, and related audiometric data." },
     health_comorbidities: { label: "Health Comorbidities", desc: "Placeholder text about health comorbidities — conditions that may co-occur with hearing loss." },
@@ -53,54 +51,61 @@ const domainMeta = {
     physical_activity: { label: "Physical Activity", desc: "Placeholder text about physical activity — recreational and total activity measures." }
 };
 
+const domainData = {
+    hearing_loss: 38,
+    health_comorbidities: 35,
+    potential_mediators: 15,
+    sociodemographic: 9,
+    physical_activity: 8
+};
+
 let activeDomainRow = null;
 
-fetch('http://127.0.0.1:8000/variables')
-    .then(response => response.json())
-    .then(data => {
-        const container = document.getElementById('domainBars');
-        const maxVal = Math.max(...Object.values(data));
+(function () {
+    const data = domainData;
+    const container = document.getElementById('domainBars');
+    const maxVal = Math.max(...Object.values(data));
 
-        Object.entries(data).forEach(([key, count]) => {
-            const meta = domainMeta[key] || { label: key, desc: "" };
-            const width = (count / maxVal * 100).toFixed(1);
+    Object.entries(data).forEach(([key, count]) => {
+        const meta = domainMeta[key] || { label: key, desc: "" };
+        const width = (count / maxVal * 100).toFixed(1);
 
-            const row = document.createElement('div');
-            row.className = 'signal-bar-row domain-bar-row';
-            row.dataset.width = width;
-            row.innerHTML = `
-                <div class="signal-bar-label">${meta.label}</div>
-                <div class="signal-bar-track"><div class="signal-bar-fill"></div></div>
-                <div class="signal-bar-value">${count}</div>
-            `;
-            row.addEventListener('click', () => {
-                if (activeDomainRow) activeDomainRow.classList.remove('active');
-                row.classList.add('active');
-                activeDomainRow = row;
+        const row = document.createElement('div');
+        row.className = 'signal-bar-row domain-bar-row';
+        row.dataset.width = width;
+        row.innerHTML = `
+            <div class="signal-bar-label">${meta.label}</div>
+            <div class="signal-bar-track"><div class="signal-bar-fill"></div></div>
+            <div class="signal-bar-value">${count}</div>
+        `;
+        row.addEventListener('click', () => {
+            if (activeDomainRow) activeDomainRow.classList.remove('active');
+            row.classList.add('active');
+            activeDomainRow = row;
 
-                const panel = document.getElementById('domainInfoPanel');
-                panel.innerHTML = `<h3>${meta.label}</h3><p><strong>${count}</strong> variables in this domain.</p><p>${meta.desc}</p>`;
-                panel.classList.add('open');
-            });
-            container.appendChild(row);
+            const panel = document.getElementById('domainInfoPanel');
+            panel.innerHTML = `<h3>${meta.label}</h3><p><strong>${count}</strong> variables in this domain.</p><p>${meta.desc}</p>`;
+            panel.classList.add('open');
         });
-
-        const domainRowObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const rows = document.querySelectorAll('.domain-bar-row');
-                    rows.forEach((row, i) => {
-                        setTimeout(() => {
-                            row.classList.add('visible');
-                            row.querySelector('.signal-bar-fill').style.width = row.dataset.width + '%';
-                        }, i * 150);
-                    });
-                    domainRowObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.2 });
-        domainRowObserver.observe(container);
+        container.appendChild(row);
     });
+
+    const domainRowObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const rows = document.querySelectorAll('.domain-bar-row');
+                rows.forEach((row, i) => {
+                    setTimeout(() => {
+                        row.classList.add('visible');
+                        row.querySelector('.signal-bar-fill').style.width = row.dataset.width + '%';
+                    }, i * 150);
+                });
+                domainRowObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.2 });
+    domainRowObserver.observe(container);
+})();
 
 // Title letter animation
 const title = document.getElementById('animatedTitle');
@@ -116,7 +121,14 @@ title.textContent = '';
 });
 
 // Confetti on load
-
+window.addEventListener('load', () => {
+    confetti({
+        particleCount: 150,
+        spread: 90,
+        origin: { y: 0.4 },
+        colors: ['#006747', '#CFC493', '#F7F7F5']
+    });
+});
 
 // Count-up stat animation (Model Results section)
 function countUp(el, target, isDecimal) {
@@ -218,7 +230,7 @@ function splitKeptDropped() {
 
     setTimeout(() => {
         document.getElementById('signalSubtitle').textContent = "3 predictors kept — 11 dropped.";
-        typeText(document.getElementById('signalPayoff'), "Physical activity didn't make the cut. Age and gender carried the signal.", 30);
+        typeText(document.getElementById('signalPayoff'), "Physical activity didn't make the cut — age and gender carried the signal.", 30);
     }, 1400);
 }
 
