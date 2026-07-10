@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Hearing Loss & Physical Activity</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar section-content">
+            <a href="#" class="nav-logo">
+                <span class="logo-text">USF</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="#overview" class="nav-link">Overview</a></li>
+                <li><a href="#why-matters" class="nav-link">Why It Matters</a></li>
+                <li><a href="#pipeline" class="nav-link">Pipeline</a></li>
+                <li><a href="#about-us" class="nav-link">About Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <div class="section-content">
+                <div class="hero-details">
+                    <h1 class="title" id="animatedTitle">Hearing Loss & Physical Activity</h1>
+                    <h3 class="subtitle">Exploring whether physical activity relates to hearing outcomes in the Hispanic
+                        Community Health Study, an underrepresented population in hearing research. A random-forest
+                        baseline finds age and gender drive the signal, not activity level.</h3>
+                    <p class="description">Built by Group 1 · USF Hackathon 2026</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="overview-section" id="overview">
+            <div class="custom-shape-divider-top-1783564403">
+                <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"
+                    preserveAspectRatio="none">
+                    <path
+                        d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
+                        class="shape-fill"></path>
+                </svg>
+            </div>
+
+            <div class="section-content">
+                <div id="stats">
+                    <div class="stat-line">Participants: <span id="participants">0</span></div>
+                    <div class="stat-line">Raw columns: <span id="raw_columns">0</span></div>
+                    <div class="stat-line">Selected vars: <span id="selected_vars">0</span></div>
+                    <div class="stat-line">Domains: <span id="domains">0</span></div>
+                </div>
+
+                <div class="domain-bars-wrap">
+                    <p class="signal-subtitle" id="domainSubtitle">Click a domain to explore</p>
+                    <div class="domain-layout">
+                        <div class="signal-bars" id="domainBars"></div>
+                        <div id="domainInfoPanel">
+                            <h3>Select a domain</h3>
+                            <p>Click a bar to see details.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Real model results -->
+                <div class="results-section">
+                    <h2 class="results-title">Model Results</h2>
+                    <p class="results-subtitle">HCHS/SOL · Random-forest baseline, 45+ cohort</p>
+
+                    <div class="results-stats">
+                        <div class="stat-line">Cohort (45+): <span class="count-target" data-target="9181">0</span>
+                        </div>
+                        <div class="stat-line">Complete-case N: <span class="count-target" data-target="15454">0</span>
+                        </div>
+                        <div class="stat-line">Predictors: <span class="count-target" data-target="14">0</span></div>
+                        <div class="stat-line">Test R²: <span class="count-target" data-target="0.14"
+                                data-decimal="true">0</span></div>
+                    </div>
+
+                    <div class="headline-box">
+                        <span class="headline-tag">Headline Finding</span>
+                        <p>Better-ear PTA is driven mainly by <strong>age</strong> and <strong>gender</strong>, with a
+                            smaller <strong>employment-status</strong> contribution. <strong>Physical activity did not
+                                survive feature selection</strong> — little unique predictive signal for hearing in this
+                            cohort.</p>
+                    </div>
+
+                    <div class="model-specs">
+                        <div class="spec-card">
+                            <h4>Outcome Y</h4>
+                            <p>Better-ear PTA (continuous, dB)</p>
+                        </div>
+                        <div class="spec-card">
+                            <h4>Exposure X</h4>
+                            <p>GPAQ total activity (min/week)</p>
+                        </div>
+                        <div class="spec-card">
+                            <h4>Estimator</h4>
+                            <p>RandomForest, 300 trees, 80/20 split</p>
+                        </div>
+                        <div class="spec-card">
+                            <h4>Missing Data</h4>
+                            <p>5% cutpoint, complete-case, no imputation</p>
+                        </div>
+                    </div>
+
+                    <h3 class="feature-table-title">Feature Selection (Permutation Importance)</h3>
+                    <p class="signal-subtitle" id="signalSubtitle">Watching 14 predictors compete for signal...</p>
+                    <div class="signal-bars" id="signalBars"></div>
+                    <p class="signal-payoff" id="signalPayoff"></p>
+
+                    <div class="notes-grid">
+                        <div class="note-card">
+                            <h4>Why the reduced model</h4>
+                            <p>Dropping weak predictors to a 3-feature model raised test R² from ~0.08 to ~0.14 by
+                                reducing overfitting. Performance is still modest — this is a prototype baseline, not a
+                                clinical tool.</p>
+                        </div>
+                        <div class="note-card">
+                            <h4>Watch-outs</h4>
+                            <p>SHAP explains the model, not causation. Unweighted, individual-level analysis — survey
+                                weights unresolved. Mediators (alcohol, diet, sleep, apnea) excluded from this baseline.
+                            </p>
+                        </div>
+                    </div>
+
+                    <p class="results-footer">Results from <code>HCHS_Hearing_PA_FINAL.ipynb</code> · RandomForest,
+                        random_state=42.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="why-section" id="why-matters">
+            <div class="wave-divider">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                    <path
+                        d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
+                        class="shape-fill-white"></path>
+                </svg>
+            </div>
+            <div class="section-content why-content">
+                <h2 class="why-title">Why It Matters</h2>
+                <p class="why-text">Hearing loss and physical activity are closely linked — yet within the Hispanic
+                    community, this connection remains significantly understudied compared to other populations. Despite
+                    Hispanic Americans facing unique health disparities and barriers to care, research specifically
+                    examining how activity levels relate to hearing outcomes in this community is limited. This
+                    dashboard aims to help surface that gap, using real NHANES data to explore patterns that could
+                    inform more targeted research and outreach.</p>
+            </div>
+        </section>
+
+        <section class="pipeline-section" id="pipeline">
+            <div class="wave-divider">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                    <path
+                        d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
+                        class="shape-fill-light"></path>
+                </svg>
+            </div>
+            <div class="section-content">
+                <h2>Build Pipeline</h2>
+                <p class="pipeline-subtitle">From 693 raw columns down to 111 analysis-ready variables across 5 domains.
+                </p>
+                <div class="pipeline-cards">
+                    <div class="pipeline-card">
+                        <div class="pipeline-step">01</div>
+                        <h4>Raw Export</h4>
+                        <p>Translated CSV + name mapping from the original NHANES source files.</p>
+                    </div>
+                    <div class="pipeline-card">
+                        <div class="pipeline-step">02</div>
+                        <h4>MW2 · Dictionary</h4>
+                        <p>Domain map, variable types, and roles assigned to each column.</p>
+                    </div>
+                    <div class="pipeline-card">
+                        <div class="pipeline-step">03</div>
+                        <h4>MW3 · Missingness</h4>
+                        <p>Columns with ≥40% missing data flagged, not dropped — distributions reviewed.</p>
+                    </div>
+                    <div class="pipeline-card">
+                        <div class="pipeline-step">04</div>
+                        <h4>MW4 · Analytic Set</h4>
+                        <p>Reduced, renamed, and ready for analysis — 111 variables across 5 domains.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-section" id="about-us">
+            <div class="wave-divider">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                    <path
+                        d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
+                        class="shape-fill-white"></path>
+                </svg>
+            </div>
+            <div class="section-content why-content">
+                <h2>Meet The Team</h2>
+                <p class="pipeline-subtitle">Group 1 · USF Hackathon Project</p>
+
+                <div class="team-carousel">
+                    <button class="carousel-arrow" id="prevBtn">&#8592;</button>
+
+                    <div class="carousel-slots">
+                        <div class="team-card side-card" id="prevCard"></div>
+                        <div class="team-card active-card" id="activeCard"></div>
+                        <div class="team-card side-card" id="nextCard"></div>
+                    </div>
+
+                    <button class="carousel-arrow" id="nextBtn">&#8594;</button>
+                </div>
+
+                <div class="carousel-dots" id="carouselDots"></div>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="script.js?v=9"></script>
+</body>
+
+</html>
