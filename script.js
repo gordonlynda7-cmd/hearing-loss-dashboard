@@ -121,14 +121,7 @@ title.textContent = '';
 });
 
 // Confetti on load
-window.addEventListener('load', () => {
-    confetti({
-        particleCount: 150,
-        spread: 90,
-        origin: { y: 0.4 },
-        colors: ['#006747', '#CFC493', '#F7F7F5']
-    });
-});
+
 
 // Count-up stat animation (Model Results section)
 function countUp(el, target, isDecimal) {
