@@ -1,3 +1,9 @@
+// Fix: strip any leftover URL hash so the page always loads at the hero
+if (window.location.hash) {
+    history.replaceState(null, null, window.location.pathname);
+    window.scrollTo(0, 0);
+}
+
 // Typewriter effect
 function typeText(el, text, speed = 60) {
     el.textContent = '';
@@ -12,7 +18,7 @@ function typeText(el, text, speed = 60) {
     step();
 }
 
-// Stats (hardcoded, no backend needed for deployment)
+// Stats (hardcoded, works locally and on Netlify)
 let statsData = {
     participants: 16415,
     raw_columns: 693,
@@ -42,13 +48,13 @@ const statsObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.3 });
 statsObserver.observe(document.getElementById('stats'));
 
-// Domain descriptions, animated bar breakdown (hardcoded, no backend needed)
+// Domain descriptions (real content, no placeholders)
 const domainMeta = {
-    hearing_loss: { label: "Hearing Loss", desc: "Placeholder text about hearing loss variables — thresholds, measures, and related audiometric data." },
-    health_comorbidities: { label: "Health Comorbidities", desc: "Placeholder text about health comorbidities — conditions that may co-occur with hearing loss." },
-    potential_mediators: { label: "Potential Mediators", desc: "Placeholder text about potential mediators — factors that may explain the link between activity and hearing outcomes." },
-    sociodemographic: { label: "Sociodemographic", desc: "Placeholder text about sociodemographic variables — age, gender, income, and background factors." },
-    physical_activity: { label: "Physical Activity", desc: "Placeholder text about physical activity — recreational and total activity measures." }
+    hearing_loss: { label: "Hearing Loss", desc: "Proper pure-tone audiometry testing from 500 to 8000 Hz. Subjective measures of hearing handicap and hearing history were also collected, including noise exposure, hearing aid use, and hearing protection use." },
+    health_comorbidities: { label: "Health Comorbidities", desc: "Diabetes, hypertension, cardiovascular disease, coronary heart disease, stroke (personal and family history), chronic obstructive pulmonary disease, kidney disease, family history of heart attack, cognition, asthma, depressive symptoms, and BMI." },
+    potential_mediators: { label: "Potential Mediators", desc: "Alcohol use, diet scores, and sleep quality." },
+    sociodemographic: { label: "Sociodemographic Factors", desc: "Age, sex, Hispanic/Latino heritage, education, income, region, marital status, and employment status." },
+    physical_activity: { label: "Physical Activity", desc: "Self-reported activity, measured in minutes per day using the Global Physical Activity Questionnaire (GPAQ), a continuous variable summing activity across occupational, transportation, and recreational contexts." }
 };
 
 const domainData = {
@@ -119,9 +125,6 @@ title.textContent = '';
     span.classList.add('letter');
     title.appendChild(span);
 });
-
-// Confetti on load
-
 
 // Count-up stat animation (Model Results section)
 function countUp(el, target, isDecimal) {
@@ -223,7 +226,7 @@ function splitKeptDropped() {
 
     setTimeout(() => {
         document.getElementById('signalSubtitle').textContent = "3 predictors kept — 11 dropped.";
-        typeText(document.getElementById('signalPayoff'), "Physical activity didn't make the cut — age and gender carried the signal.", 30);
+        typeText(document.getElementById('signalPayoff'), "Physical activity didn't make the cut, age and gender carried the signal.", 30);
     }, 1400);
 }
 
@@ -268,41 +271,77 @@ if (pipelineCards.length > 0) {
     pipelineObserver.observe(pipelineCards[0]);
 }
 
-// Team carousel - fixed 3-slot layout with fade + slide transition, wraps around
+// Team panel: full-width single view, arrows navigate
 const teamMembers = [
-    { initials: "LG", name: "Lynda Gordon", role: "Website Developer", desc: "Junior, Computer Science, University of South Florida. Built the full-stack dashboard — FastAPI backend, interactive frontend, and data visualizations." },
-    { initials: "AW", name: "Annisha Wazed", role: "Placeholder Role", desc: "Placeholder description — add what Annisha worked on here." },
-    { initials: "CC", name: "Christine Chinapoo", role: "Placeholder Role", desc: "Placeholder description — add what Christine worked on here." },
-    { initials: "FW", name: "Fiorella Wu Cam", role: "Placeholder Role", desc: "Placeholder description — add what Fiorella worked on here." },
-    { initials: "FY", name: "Fuad Yunusov", role: "Placeholder Role", desc: "Placeholder description — add what Fuad worked on here." },
-    { initials: "TA", name: "Theresa Alsaindor", role: "Placeholder Role", desc: "Placeholder description — add what Theresa worked on here." }
+    {
+        initials: "LG",
+        name: "Lynda Gordon",
+        role: "Website Developer",
+        bio: "Based in Tampa. Junior in <strong>Computer Science</strong> at USF, Class Representative for 2028 and active in <strong>ASME Robotics</strong>. Outside of coursework, she's usually deep in a side project: training <strong>YOLOv8 models</strong>, wiring up <strong>Arduino builds</strong>, or teaching herself whatever AI concept she got curious about that week. Somewhere in between she also teaches kids to code at iD Tech, works Salesforce and support at Macmillan Learning, and keeps IT running at Help Us Grow Foundation. Looking for a <strong>Software Engineering internship for Summer 2027</strong>, Florida or Texas preferred.",
+        contribution: "Built the full-stack dashboard as the sole developer, including the <strong>FastAPI backend</strong>, custom animated data visualizations in vanilla HTML, CSS, and JavaScript, and scroll-triggered interactions using <strong>IntersectionObserver</strong>. Deployed live via <strong>Netlify</strong> with continuous deployment from GitHub.",
+        socials: [{ label: "LinkedIn", url: "https://www.linkedin.com/in/lynda-g2456/" }]
+    },
+    {
+        initials: "TA",
+        name: "Theresa Alsaindor",
+        role: "Data Science Researcher",
+        bio: "Data science student at the University of South Florida (<strong>B.S. Information Science, Data Science & Analytics</strong>, May 2027), based in Tampa. Works at the intersection of machine learning and public health as a student researcher with USF's <strong>Center for Innovation, Technology and Aging</strong>.",
+        contribution: "Helped build a reproducible ML workflow on a <strong>16,000+ participant health cohort (HCHS/SOL)</strong>, cleaning and merging 693 raw columns into a curated analytic dataset, running <strong>Random Forest models</strong>, and using <strong>SHAP and permutation importance</strong> to identify what actually drives hearing loss outcomes.",
+        socials: [{ label: "LinkedIn", url: "https://www.linkedin.com/in/theresa-alsaindor-121654328/" }]
+    },
+    {
+        initials: "CC",
+        name: "Christine Chinapoo",
+        role: "Data Intelligence, M.S. Candidate",
+        bio: "From Trinidad and Tobago. B.S. in <strong>Cybersecurity</strong> with a minor in Management Information Systems from the University of Tampa, where she served as <strong>President of the Women in Cybersecurity (WiCyS)</strong> chapter. Worked as a data analyst for about two years before starting her <strong>M.S. in Data Intelligence</strong> at USF. Outside of work and school, she enjoys dancing salsa, training in Muay Thai, kayaking, and spending time outdoors with her mini Goldendoodle, Brownie.",
+        contribution: "Expanded and improved the machine learning modeling workflow. Implemented additional regression and ensemble models, including <strong>Linear Regression, Random Forest, Gradient Boosting, XGBoost, and Extra Trees</strong>, for a fuller comparison of predictive performance. Performed <strong>hyperparameter tuning</strong> on the Random Forest model, standardized evaluation across all models, and updated the interpretation of results and conclusions. Also documented the modeling workflow and built visualizations to make the analysis more transparent and reproducible.",
+        socials: [{ label: "LinkedIn", url: "https://www.linkedin.com/in/christine-chinapoo/" }]
+    },
+    {
+
+        initials: "FW",
+        name: "Fiorella Wu Cam",
+        role: "Clinical Research & Domain Expertise",
+        bio: "Graduate of the University of South Florida with dual degrees in <strong>Psychology</strong> and <strong>Language, Hearing and Speech Sciences</strong> (May 2025). Brings over two years of hands-on clinical research experience, including work at USF's <strong>Auditory Rehabilitation and Clinical Trials Lab</strong>, where she recruited participants, managed hearing aid study materials, and handled clinical data through REDCap. Passionate about advancing hearing healthcare and reducing barriers to treatment.",
+        contribution: "Brought domain expertise in <strong>audiology and clinical research</strong> to guide the project's framing and content accuracy, reviewing the dashboard for correctness and clarity from a hearing-health perspective. Provided feedback on data labeling, terminology, and presentation to ensure the site accurately reflected the study's methodology and findings.",
+        socials: [{ label: "LinkedIn", url: "https://www.linkedin.com/in/fiorella-wu-cam/" }]
+    },
+    {
+        initials: "FY",
+        name: "Fuad Yunusov",
+        role: "Machine Learning Engineer",
+        bio: "Master's student in <strong>Computer Engineering</strong> at the University of South Florida, building on a B.S. in the same field from USF. Passionate about applying AI and machine learning to real-world problems, from ensemble models predicting real estate prices with <strong>90%+ accuracy</strong> to on-device ML in mobile apps. Previously worked as a Mobile App Developer Intern at Resilience, Inc., integrating TensorFlow Lite and Core ML into cross-platform apps used by <strong>10,000+ users</strong>.",
+        contribution: "Built the core machine learning workflow for the project, including data quality checks and dataset preparation. Developed, validated, and refined the <strong>Random Forest model</strong>, incorporating <strong>feature selection</strong> and <strong>SHAP-based explainability</strong> to identify what actually drives hearing loss outcomes.",
+        socials: [{ label: "LinkedIn", url: "https://www.linkedin.com/in/fdyunusov/" }]
+    },
 ];
 
 let currentMember = 0;
 
 function cardHTML(member) {
-    if (!member) return '<div class="card-content"></div>';
+    const socialsHTML = member.socials.map(s =>
+        `<a href="${s.url}" target="_blank" class="team-social-link">${s.label}</a>`
+    ).join('');
+
     return `
-        <div class="card-content">
-            <div class="team-initials">${member.initials}</div>
-            <h3>${member.name}</h3>
-            <p class="team-role">${member.role}</p>
-            <p class="team-desc">${member.desc}</p>
+        <div class="panel-content">
+            <div class="panel-left">
+                <div class="team-initials">${member.initials}</div>
+                <h3>${member.name}</h3>
+                <p class="team-role">${member.role}</p>
+                <div class="team-socials">${socialsHTML}</div>
+            </div>
+            <div class="panel-right">
+                <p>${member.bio}</p>
+                <h5>Project Contribution</h5>
+                <p>${member.contribution}</p>
+            </div>
         </div>
     `;
 }
 
 function fillSlots() {
-    const prevIndex = currentMember - 1;
-    const nextIndex = currentMember + 1;
-
-    document.getElementById('prevCard').innerHTML = cardHTML(teamMembers[prevIndex]);
-    document.getElementById('activeCard').innerHTML = cardHTML(teamMembers[currentMember]);
-    document.getElementById('nextCard').innerHTML = cardHTML(teamMembers[nextIndex]);
-
-    document.getElementById('prevCard').style.visibility = prevIndex >= 0 ? 'visible' : 'hidden';
-    document.getElementById('nextCard').style.visibility = nextIndex < teamMembers.length ? 'visible' : 'hidden';
-
+    document.getElementById('teamPanel').innerHTML = cardHTML(teamMembers[currentMember]);
     document.querySelectorAll('.dot').forEach((dot, i) => {
         dot.classList.toggle('active-dot', i === currentMember);
     });
@@ -314,15 +353,11 @@ function renderCarousel(direction = 0) {
         return;
     }
 
-    const slots = document.querySelector('.carousel-slots');
-    const allContent = document.querySelectorAll('.card-content');
-
-    allContent.forEach(el => el.classList.add('fading'));
-    slots.classList.add(direction > 0 ? 'slide-left' : 'slide-right');
+    const content = document.querySelector('.panel-content');
+    if (content) content.classList.add('fading');
 
     setTimeout(() => {
         fillSlots();
-        slots.classList.remove('slide-left', 'slide-right');
     }, 250);
 }
 

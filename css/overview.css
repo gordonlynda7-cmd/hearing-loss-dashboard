@@ -1,0 +1,412 @@
+.overview-section {
+    background-color: white;
+    padding: 60px 20px;
+    padding-top: 240px;
+    position: relative;
+}
+
+/* Stat lines */
+#stats {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 60px;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+.stat-line {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text-dark);
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.stat-line.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.stat-line:nth-child(1) {
+    transition-delay: 0s;
+}
+
+.stat-line:nth-child(2) {
+    transition-delay: 0.2s;
+}
+
+.stat-line:nth-child(3) {
+    transition-delay: 0.4s;
+}
+
+.stat-line:nth-child(4) {
+    transition-delay: 0.6s;
+}
+
+/* Domain bars */
+.domain-bars-wrap {
+    max-width: 1100px;
+    margin: 0 auto 60px;
+}
+
+.domain-bars-wrap .signal-subtitle {
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.domain-layout {
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+}
+
+.domain-layout .signal-bars {
+    flex: 1;
+    max-width: none;
+    margin: 0;
+}
+
+.domain-layout .signal-bar-row {
+    margin-bottom: 20px;
+    gap: 18px;
+}
+
+.domain-layout .signal-bar-label {
+    width: 220px;
+    font-size: 18px;
+}
+
+.domain-layout .signal-bar-track {
+    height: 36px;
+    border-radius: 8px;
+}
+
+.domain-layout .signal-bar-fill {
+    border-radius: 8px;
+}
+
+.domain-layout .signal-bar-value {
+    width: 60px;
+    font-size: 16px;
+}
+
+.domain-bar-row {
+    cursor: pointer;
+}
+
+.domain-bar-row:hover .signal-bar-fill {
+    filter: brightness(1.1);
+}
+
+.domain-bar-row.active .signal-bar-label {
+    color: var(--usf-green-dark);
+    font-weight: 700;
+}
+
+.domain-bar-row.active .signal-bar-fill {
+    box-shadow: 0 0 14px rgba(0, 103, 71, 0.55);
+}
+
+#domainInfoPanel {
+    width: 0;
+    flex-shrink: 0;
+    background: var(--bg-light);
+    border-radius: var(--border-radius-m);
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.07);
+    height: auto;
+    align-self: stretch;
+    opacity: 0;
+    overflow: hidden;
+    padding: 0;
+    white-space: nowrap;
+    transition: width 0.4s ease, opacity 0.3s ease, padding 0.4s ease;
+}
+
+#domainInfoPanel.open {
+    width: 320px;
+    padding: 24px;
+    opacity: 1;
+    white-space: normal;
+}
+
+#domainInfoPanel h3 {
+    text-transform: capitalize;
+    color: var(--usf-green-dark);
+    margin-top: 0;
+}
+
+@media (max-width: 800px) {
+    .domain-layout {
+        flex-direction: column;
+    }
+
+    #domainInfoPanel.open {
+        width: 100%;
+    }
+}
+
+/* Model Results section */
+.results-section {
+    margin-top: 80px;
+}
+
+.results-title {
+    text-align: center;
+    color: var(--usf-green-dark);
+    font-size: 32px;
+    margin-bottom: 4px;
+}
+
+.results-subtitle {
+    text-align: center;
+    color: #666;
+    font-size: 15px;
+    margin-bottom: 30px;
+}
+
+.results-stats {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.results-stats .stat-line {
+    opacity: 1;
+    transform: none;
+    font-size: 18px;
+}
+
+.results-stats .stat-line span {
+    color: var(--usf-green-dark);
+    font-weight: 700;
+}
+
+.headline-box {
+    background: var(--usf-gold-light);
+    border-left: 4px solid var(--usf-gold);
+    border-radius: var(--border-radius-m);
+    padding: 20px 24px;
+    max-width: 800px;
+    margin: 0 auto 40px;
+}
+
+.headline-tag {
+    display: inline-block;
+    background: var(--usf-green);
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+
+.headline-box p {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.model-specs {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
+.spec-card {
+    background: var(--bg-light);
+    border-radius: var(--border-radius-m);
+    padding: 18px 20px;
+    width: 220px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.spec-card h4 {
+    margin: 0 0 8px;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--usf-green);
+}
+
+.spec-card p {
+    margin: 0;
+    font-size: 17px;
+    color: #444;
+}
+
+.feature-table-title {
+    text-align: center;
+    color: var(--usf-green-dark);
+    font-size: 22px;
+    margin-bottom: 4px;
+}
+
+/* Signal Hunt animated bars (shared base, used by both domain bars + feature bars) */
+.signal-subtitle {
+    text-align: center;
+    color: #888;
+    font-size: 17px;
+    font-style: italic;
+    margin-bottom: 24px;
+}
+
+.signal-bars {
+    max-width: 1000px;
+    margin: 0 auto 30px;
+}
+
+.signal-bar-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 12px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.signal-bar-row.visible {
+    opacity: 1;
+}
+
+.signal-bar-label {
+    width: 260px;
+    flex-shrink: 0;
+    font-size: 17px;
+    color: #444;
+    text-align: right;
+    transition: color 0.5s ease, font-weight 0.5s ease, font-size 0.5s ease;
+}
+
+.signal-bar-track {
+    flex: 1;
+    background: #f0f0f0;
+    height: 32px;
+    border-radius: 6px;
+    overflow: hidden;
+    transition: height 0.5s ease;
+}
+
+.signal-bar-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--usf-green);
+    border-radius: 6px;
+    transition: width 0.7s cubic-bezier(0.34, 1.56, 0.64, 1),
+        background 0.5s ease, box-shadow 0.5s ease;
+}
+
+.signal-bar-value {
+    width: 70px;
+    flex-shrink: 0;
+    font-size: 15px;
+    color: #888;
+    font-family: monospace;
+}
+
+.signal-bar-row.kept .signal-bar-label {
+    color: var(--usf-green-dark);
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.signal-bar-row.kept .signal-bar-fill {
+    box-shadow: 0 0 14px rgba(0, 103, 71, 0.55);
+}
+
+.signal-bar-row.dropped {
+    opacity: 0.55;
+}
+
+.signal-bar-row.dropped .signal-bar-track {
+    height: 14px;
+}
+
+.signal-bar-row.dropped .signal-bar-fill {
+    background: #ccc;
+}
+
+.signal-bar-row.dropped .signal-bar-label {
+    font-size: 15px;
+    color: #999;
+}
+
+.signal-bar-row.pulse .signal-bar-fill {
+    animation: pulseAlert 0.7s ease;
+}
+
+@keyframes pulseAlert {
+
+    0%,
+    100% {
+        background: var(--usf-green);
+    }
+
+    50% {
+        background: #d9534f;
+        box-shadow: 0 0 20px rgba(217, 83, 79, 0.6);
+    }
+}
+
+.signal-payoff {
+    text-align: center;
+    max-width: 800px;
+    margin: 30px auto 20px;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--usf-green-dark);
+    min-height: 28px;
+}
+
+.notes-grid {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 900px;
+    margin: 40px auto 20px;
+}
+
+.note-card {
+    background: white;
+    border: 1px solid #eee;
+    border-radius: var(--border-radius-m);
+    padding: 20px;
+    flex: 1;
+    min-width: 280px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+}
+
+.note-card h4 {
+    margin: 0 0 8px;
+    color: var(--usf-green-dark);
+    font-size: 18px;
+}
+
+.note-card p {
+    margin: 0;
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+}
+
+.results-footer {
+    text-align: center;
+    font-size: 12px;
+    color: #999;
+    margin-top: 20px;
+}
+
+.results-footer code {
+    background: #f0f0f0;
+    padding: 2px 6px;
+    border-radius: 4px;
+}

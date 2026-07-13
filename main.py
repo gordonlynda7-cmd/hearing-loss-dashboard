@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+import sqlite3
 
 app = FastAPI()
 
@@ -11,6 +12,12 @@ app.add_middleware(
 )
 
 
+def get_db_connection():
+    conn = sqlite3.connect('hearing_data.db')
+    conn.row_factory = sqlite3.Row
+    return conn
+
+
 @app.get("/")
 def root():
     return {"Hello": "World"}
@@ -18,20 +25,15 @@ def root():
 
 @app.get("/stats")
 def stats():
-    return {
-        "participants": 16415,
-        "raw_columns": 693,
-        "selected_vars": 111,
-        "domains": 5
-    }
+    conn = get_db_connection()
+    row = conn.execute('SELECT * FROM stats').fetchone()
+    conn.close()
+    return dict(row)
 
 
 @app.get("/variables")
 def variables():
-    return {
-        "hearing_loss": 38,
-        "health_comorbidities": 35,
-        "potential_mediators": 15,
-        "sociodemographic": 9,
-        "physical_activity": 8
-    }
+    conn = get_db_connection()
+    rows = conn.execute('SELECT * FROM domain_variables').fetchall()
+    conn.close()
+    return {row['domain']: row['variable_count'] for row in rows}

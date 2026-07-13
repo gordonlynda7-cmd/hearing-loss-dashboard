@@ -1,0 +1,75 @@
+.hero-section {
+    background-color: var(--bg-light);
+    position: relative;
+}
+
+.hero-section .section-content {
+    text-align: center;
+    padding-top: 100px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.hero-section .section-content h1 {
+    font-size: 75px;
+    font-weight: 700;
+    margin: 0 0 12px;
+}
+
+.hero-section .subtitle {
+    font-size: 22px;
+    color: var(--text-dark);
+    margin: 0 0 8px;
+}
+
+.hero-section .description {
+    font-size: 16px;
+    color: #555;
+}
+
+.letter {
+    display: inline-block;
+    animation: rainbowPop 1s ease forwards;
+    transform: scale(0);
+    opacity: 0;
+}
+
+@keyframes rainbowPop {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+        color: red;
+    }
+
+    15% {
+        color: orange;
+    }
+
+    30% {
+        color: yellow;
+    }
+
+    45% {
+        color: green;
+    }
+
+    60% {
+        transform: scale(1.3);
+        color: blue;
+    }
+
+    75% {
+        color: indigo;
+    }
+
+    90% {
+        color: violet;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+        color: black;
+    }
+}

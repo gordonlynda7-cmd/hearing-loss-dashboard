@@ -4,7 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Hearing Loss & Physical Activity</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/hero.css">
+    <link rel="stylesheet" href="css/overview.css">
+    <link rel="stylesheet" href="css/why-pipeline.css">
+    <link rel="stylesheet" href="css/about.css">
 </head>
 
 <body>
@@ -28,8 +32,8 @@
                 <div class="hero-details">
                     <h1 class="title" id="animatedTitle">Hearing Loss & Physical Activity</h1>
                     <h3 class="subtitle">Exploring whether physical activity relates to hearing outcomes in the Hispanic
-                        Community Health Study, an underrepresented population in hearing research. A random-forest
-                        baseline finds age and gender drive the signal, not activity level.</h3>
+                        Community Health Study / Study of Latinos (HCHS/SOL), a population that has been largely left
+                        out of hearing health research.</h3>
                     <p class="description">Built by Group 1 · USF Hackathon 2026</p>
                 </div>
             </div>
@@ -83,8 +87,8 @@
                         <span class="headline-tag">Headline Finding</span>
                         <p>Better-ear PTA is driven mainly by <strong>age</strong> and <strong>gender</strong>, with a
                             smaller <strong>employment-status</strong> contribution. <strong>Physical activity did not
-                                survive feature selection</strong> — little unique predictive signal for hearing in this
-                            cohort.</p>
+                                survive feature selection</strong>, showing little unique predictive signal for hearing
+                            in this cohort.</p>
                     </div>
 
                     <div class="model-specs">
@@ -94,7 +98,7 @@
                         </div>
                         <div class="spec-card">
                             <h4>Exposure X</h4>
-                            <p>GPAQ total activity (min/week)</p>
+                            <p>Global Physical Activity Questionnaire (GPAQ) total activity (min/week)</p>
                         </div>
                         <div class="spec-card">
                             <h4>Estimator</h4>
@@ -114,15 +118,15 @@
                     <div class="notes-grid">
                         <div class="note-card">
                             <h4>Why the reduced model</h4>
-                            <p>Dropping weak predictors to a 3-feature model raised test R² from ~0.08 to ~0.14 by
-                                reducing overfitting. Performance is still modest — this is a prototype baseline, not a
-                                clinical tool.</p>
+                            <p>Dropping weak predictors to a 3-feature model raised test R² from about 0.08 to about
+                                0.14 by reducing overfitting. Performance is still modest. This is a prototype
+                                baseline, not a clinical tool.</p>
                         </div>
                         <div class="note-card">
                             <h4>Watch-outs</h4>
-                            <p>SHAP explains the model, not causation. Unweighted, individual-level analysis — survey
-                                weights unresolved. Mediators (alcohol, diet, sleep, apnea) excluded from this baseline.
-                            </p>
+                            <p>SHAP explains the model, not causation. This is an unweighted, individual-level analysis;
+                                survey weights are unresolved. Mediators such as alcohol, diet, sleep, and apnea were
+                                excluded from this baseline.</p>
                         </div>
                     </div>
 
@@ -142,12 +146,58 @@
             </div>
             <div class="section-content why-content">
                 <h2 class="why-title">Why It Matters</h2>
-                <p class="why-text">Hearing loss and physical activity are closely linked — yet within the Hispanic
-                    community, this connection remains significantly understudied compared to other populations. Despite
-                    Hispanic Americans facing unique health disparities and barriers to care, research specifically
-                    examining how activity levels relate to hearing outcomes in this community is limited. This
-                    dashboard aims to help surface that gap, using real NHANES data to explore patterns that could
-                    inform more targeted research and outreach.</p>
+
+                <div class="why-stats">
+                    <div class="why-stat">
+                        <div class="why-stat-num">37.9M</div>
+                        <p>U.S. adults aged 35+ affected by hearing loss (11.6%)</p>
+                    </div>
+                    <div class="why-stat">
+                        <div class="why-stat-num">~15%</div>
+                        <p>Higher prevalence in Hispanic/Latinx adults vs. the national average</p>
+                    </div>
+                    <div class="why-stat">
+                        <div class="why-stat-num">19→29%</div>
+                        <p>Projected U.S. share of the Hispanic/Latinx population by 2050</p>
+                    </div>
+                </div>
+
+                <p class="why-text">Hearing loss research in Hispanic and Latino adults has been limited, even though
+                    the burden falls unevenly on this group. Among adults 45+, less physical activity tends to go hand
+                    in hand with hearing loss, and the relationship seems to run both ways. Worse hearing predicts more
+                    fragmented activity and faster decline, while higher, more vigorous activity is linked to lower
+                    hearing-loss risk, likely through cardiovascular pathways. No study has looked at this specifically
+                    in Hispanic/Latinx adults until now.</p>
+
+                <div class="why-cards">
+                    <div class="why-card">
+                        <h4>Compounded Risk Profile</h4>
+                        <ul>
+                            <li>Poorer cognitive performance and faster decline</li>
+                            <li>Higher rates of diabetes, hypertension, and occupational noise exposure</li>
+                            <li>Social and structural barriers to hearing healthcare</li>
+                        </ul>
+                    </div>
+                    <div class="why-card">
+                        <h4>Physical Activity as a Lever</h4>
+                        <ul>
+                            <li>A modifiable behavior that may buffer cardiometabolic and cognitive risk</li>
+                            <li>Could lower downstream falls risk</li>
+                            <li>Bidirectional with hearing loss via cardiovascular pathways</li>
+                        </ul>
+                    </div>
+                    <div class="why-card">
+                        <h4>Machine Learning Advantage</h4>
+                        <ul>
+                            <li>Captures non-linear, multidimensional hearing to activity interactions</li>
+                            <li>Quantifies feature importance to probe mediation</li>
+                            <li>May reduce reliance on costly serial audiometric testing</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <p class="why-goal"><strong>Goal:</strong> culturally tailored evidence to shape screening pathways,
+                    community programs, and public health policy for the fastest growing U.S. panethnic group.</p>
             </div>
         </section>
 
@@ -167,7 +217,7 @@
                     <div class="pipeline-card">
                         <div class="pipeline-step">01</div>
                         <h4>Raw Export</h4>
-                        <p>Translated CSV + name mapping from the original NHANES source files.</p>
+                        <p>Translated CSV and name mapping from the original HCHS/SOL source files.</p>
                     </div>
                     <div class="pipeline-card">
                         <div class="pipeline-step">02</div>
@@ -177,12 +227,12 @@
                     <div class="pipeline-card">
                         <div class="pipeline-step">03</div>
                         <h4>MW3 · Missingness</h4>
-                        <p>Columns with ≥40% missing data flagged, not dropped — distributions reviewed.</p>
+                        <p>Columns with 40% or more missing data flagged, not dropped, distributions reviewed.</p>
                     </div>
                     <div class="pipeline-card">
                         <div class="pipeline-step">04</div>
                         <h4>MW4 · Analytic Set</h4>
-                        <p>Reduced, renamed, and ready for analysis — 111 variables across 5 domains.</p>
+                        <p>Reduced, renamed, and ready for analysis. 111 variables across 5 domains.</p>
                     </div>
                 </div>
             </div>
@@ -203,11 +253,7 @@
                 <div class="team-carousel">
                     <button class="carousel-arrow" id="prevBtn">&#8592;</button>
 
-                    <div class="carousel-slots">
-                        <div class="team-card side-card" id="prevCard"></div>
-                        <div class="team-card active-card" id="activeCard"></div>
-                        <div class="team-card side-card" id="nextCard"></div>
-                    </div>
+                    <div class="team-panel" id="teamPanel"></div>
 
                     <button class="carousel-arrow" id="nextBtn">&#8594;</button>
                 </div>
@@ -217,8 +263,7 @@
         </section>
     </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-    <script src="script.js?v=9"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>

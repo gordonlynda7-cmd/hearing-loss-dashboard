@@ -1,0 +1,222 @@
+/* Why It Matters */
+.why-section {
+    background-color: var(--bg-light);
+    padding: 60px 20px;
+    padding-top: 160px;
+    position: relative;
+}
+
+.why-content {
+    max-width: 1000px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.why-title {
+    color: var(--usf-green-dark);
+    font-size: 36px;
+    margin-bottom: 16px;
+    opacity: 0;
+    transform: translateY(40px) scale(0.8);
+    transition: opacity 0.7s cubic-bezier(0.34, 1.56, 0.64, 1),
+        transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.why-title.in-view {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.why-stats {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+
+.why-stat {
+    background: white;
+    border-radius: var(--border-radius-m);
+    padding: 24px;
+    width: 220px;
+    text-align: center;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.why-stat-num {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--usf-gold);
+}
+
+.why-stat p {
+    font-size: 13px;
+    color: #555;
+    margin: 8px 0 0;
+}
+
+.why-text {
+    font-size: 22px;
+    line-height: 1.7;
+    color: var(--text-dark);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease 0.4s, transform 0.6s ease 0.4s;
+}
+
+.why-text.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.why-cards {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 40px 0;
+    text-align: left;
+}
+
+.why-card {
+    background: white;
+    border-radius: var(--border-radius-m);
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.07);
+    padding: 24px;
+    flex: 1;
+    min-width: 260px;
+}
+
+.why-card h4 {
+    color: var(--usf-green-dark);
+    margin: 0 0 14px;
+    font-size: 20px;
+}
+
+.why-card ul {
+    margin: 0;
+    padding: 0;
+}
+
+.why-card li {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 12px;
+    padding-left: 16px;
+    position: relative;
+}
+
+.why-card li::before {
+    content: "•";
+    color: var(--usf-green);
+    position: absolute;
+    left: 0;
+}
+
+.why-goal {
+    text-align: center;
+    font-size: 16px;
+    color: var(--usf-green-dark);
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* Pipeline */
+.pipeline-section {
+    background-color: white;
+    padding: 60px 20px;
+    padding-top: 160px;
+    position: relative;
+}
+
+.pipeline-section h2 {
+    text-align: center;
+    color: var(--usf-green-dark);
+    font-size: 36px;
+    margin-bottom: 8px;
+}
+
+.pipeline-subtitle {
+    text-align: center;
+    color: #666;
+    font-size: 16px;
+    margin-bottom: 40px;
+}
+
+.pipeline-cards {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.pipeline-card {
+    background: var(--bg-light);
+    border-radius: var(--border-radius-m);
+    padding: 28px 24px;
+    max-width: 260px;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.07);
+    position: relative;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.pipeline-card.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.pipeline-card:nth-child(1) {
+    transition-delay: 0s;
+}
+
+.pipeline-card:nth-child(2) {
+    transition-delay: 0.15s;
+}
+
+.pipeline-card:nth-child(3) {
+    transition-delay: 0.3s;
+}
+
+.pipeline-card:nth-child(4) {
+    transition-delay: 0.45s;
+}
+
+.pipeline-card:not(:last-child)::after {
+    content: "→";
+    position: absolute;
+    top: 50%;
+    right: -30px;
+    transform: translateY(-50%);
+    font-size: 24px;
+    color: var(--usf-green);
+    font-weight: bold;
+}
+
+.pipeline-step {
+    display: inline-block;
+    background: var(--usf-green);
+    color: white;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+}
+
+.pipeline-card h4 {
+    color: var(--usf-green-dark);
+    margin: 0 0 8px;
+    font-size: 18px;
+}
+
+.pipeline-card p {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.5;
+    margin: 0;
+}
