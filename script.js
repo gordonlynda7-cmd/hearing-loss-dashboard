@@ -297,15 +297,7 @@ const teamMembers = [
         contribution: "Expanded and improved the machine learning modeling workflow. Implemented additional regression and ensemble models, including <strong>Linear Regression, Random Forest, Gradient Boosting, XGBoost, and Extra Trees</strong>, for a fuller comparison of predictive performance. Performed <strong>hyperparameter tuning</strong> on the Random Forest model, standardized evaluation across all models, and updated the interpretation of results and conclusions. Also documented the modeling workflow and built visualizations to make the analysis more transparent and reproducible.",
         socials: [{ label: "LinkedIn", url: "https://www.linkedin.com/in/christine-chinapoo/" }]
     },
-    {
 
-        initials: "FW",
-        name: "Fiorella Wu Cam",
-        role: "Clinical Research & Domain Expertise",
-        bio: "Graduate of the University of South Florida with dual degrees in <strong>Psychology</strong> and <strong>Language, Hearing and Speech Sciences</strong> (May 2025). Brings over two years of hands-on clinical research experience, including work at USF's <strong>Auditory Rehabilitation and Clinical Trials Lab</strong>, where she recruited participants, managed hearing aid study materials, and handled clinical data through REDCap. Passionate about advancing hearing healthcare and reducing barriers to treatment.",
-        contribution: "Brought domain expertise in <strong>audiology and clinical research</strong> to guide the project's framing and content accuracy, reviewing the dashboard for correctness and clarity from a hearing-health perspective. Provided feedback on data labeling, terminology, and presentation to ensure the site accurately reflected the study's methodology and findings.",
-        socials: [{ label: "LinkedIn", url: "https://www.linkedin.com/in/fiorella-wu-cam/" }]
-    },
     {
         initials: "FY",
         name: "Fuad Yunusov",
